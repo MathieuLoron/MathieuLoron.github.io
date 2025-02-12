@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: url('images/Rose.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5); /* Ajoute une superposition sombre */
+            transition: opacity 1s ease-in-out;
+        }
+        body.fade-out {
+            opacity: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 50%;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        #container button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            background-color: #ff69b4;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #container button:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+        #moveButton {
+            transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<h1>Veux-tu être ma valentine ?</h1>
+    
+    <div id="container">
+        <button id="yesButton">Oui</button>
+        <button id="moveButton">Non</button>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#yesButton").click(function(){
+                $("body").addClass("fade-out");
+                setTimeout(function(){
+                    window.location.href = "love.html";
+                }, 1000); // Correspond à la durée de la transition
+            });
+
+            $("#moveButton").hover(function(){
+                let containerWidth = $("#container").width();
+                let containerHeight = $("#container").height();
+                let buttonWidth = $(this).outerWidth();
+                let buttonHeight = $(this).outerHeight();
+
+                // Générer des positions aléatoires dans les limites du conteneur
+                let randomLeft = Math.random() * (containerWidth - buttonWidth);
+                let randomTop = Math.random() * (containerHeight - buttonHeight);
+                $(this).css({ position: 'absolute', left: randomLeft, top: randomTop });
+            });
+        });
+    </script>
+</body>
+</html>
